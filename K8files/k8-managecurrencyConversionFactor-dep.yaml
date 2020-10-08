@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: managecurrencyConversionFactor
+    version: v1
+  name: managecurrencyConversionFactor
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: managecurrencyConversionFactor
+      version: v1
+  template: 
+    metadata: 
+      labels: 
+        app: managecurrencyConversionFactor
+        version: v1
+    spec: 
+      containers: 
+        - image: "rajashree/managecurrencyConversionFactor25:1"
+          imagePullPolicy: Always
+          name: managecurrencyConversionFactor
+          ports: 
+          - containerPort: 8008
+          env:
+            - name: eureka.uri
+              value: "http://eurekaserver:8761/eureka"
+          resources:
+            requests:
+                memory: "256Mi"
+                cpu: "200m"
+            limits:
+                memory: "768Mi"
+                cpu: "400m"                
